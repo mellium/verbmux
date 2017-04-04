@@ -1,7 +1,11 @@
+// Copyright 2017 Soquee.
+// Use of this source code is governed by the BSD 2-clause license that can be
+// found in the LICENSE file.
+
 // Package verbmux provides functionality for a simple HTTP multiplexer that
 // routes requests based on the HTTP verb (GET, POST, CONNECT, etc.). It can
 // handle OPTIONS requests automatically.
-package verbmux
+package verbmux // import "soquee.net/verbmux"
 
 import (
 	"net/http"
@@ -13,7 +17,7 @@ type verbMux map[string]http.Handler
 // New constructs a new multiplexer that responds to requests with the provided
 // verb's. OPTIONS requests are automatically handled unless they are
 // overridden.
-func New(v ...verb) http.Handler {
+func New(v ...Verb) http.Handler {
 	vm := make(verbMux)
 	for _, vfunc := range v {
 		vfunc(vm)
@@ -46,35 +50,37 @@ func (vm verbMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 }
 
-type verb func(vm verbMux)
+// Verb represents an HTTP verb such as GET or PUT. Verbs should not be created
+// manually, instead use Custom or one of the existing verb functions.
+type Verb func(vm verbMux)
 
 // TODO: HEAD, TRACE, CONNECT, PATCH
 
 // Custom handles custom HTTP verbs, for example, if you wanted to handle the
 // WebDAV LOCK or UNLOCK verbs.
-func Custom(verb string, handler http.Handler) verb {
+func Custom(verb string, handler http.Handler) Verb {
 	return func(vm verbMux) {
 		vm[verb] = handler
 	}
 }
 
 // Get handles HTTP GET requests.
-func Get(handler http.Handler) verb {
+func Get(handler http.Handler) Verb {
 	return Custom("GET", handler)
 }
 
 // Post handles HTTP POST requests.
-func Post(handler http.Handler) verb {
+func Post(handler http.Handler) Verb {
 	return Custom("POST", handler)
 }
 
 // Put handles HTTP PUT requests.
-func Put(handler http.Handler) verb {
+func Put(handler http.Handler) Verb {
 	return Custom("PUT", handler)
 }
 
 // Delete handles HTTP DELETE requests.
-func Delete(handler http.Handler) verb {
+func Delete(handler http.Handler) Verb {
 	return Custom("DELETE", handler)
 }
 
@@ -82,6 +88,6 @@ func Delete(handler http.Handler) verb {
 // requests by default, so an Options verb only needs to be specified if custom
 // behavior is desired, or OPTIONS requests should not be handled (by passing a
 // nil handler).
-func Options(handler http.Handler) verb {
+func Options(handler http.Handler) Verb {
 	return Custom("OPTIONS", handler)
 }
