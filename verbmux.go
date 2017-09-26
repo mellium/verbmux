@@ -1,11 +1,11 @@
-// Copyright 2017 Soquee.
-// Use of this source code is governed by the BSD 2-clause license that can be
-// found in the LICENSE file.
+// Copyright 2017 The Mellium Contributors.
+// Use of this source code is governed by the BSD 2-clause
+// license that can be found in the LICENSE file.
 
 // Package verbmux provides functionality for a simple HTTP multiplexer that
 // routes requests based on the HTTP verb (GET, POST, CONNECT, etc.). It can
 // handle OPTIONS requests automatically.
-package verbmux // import "soquee.net/verbmux"
+package verbmux // import "mellium.im/verbmux"
 
 import (
 	"net/http"
@@ -41,7 +41,7 @@ func New(v ...Verb) http.Handler {
 // ServeHTTP dispatches the request to the handler that matches its verb. If no
 // handler matches it serves a 405 Method Not Allowed.
 func (vm verbMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if handler, ok := vm[r.Method]; ok {
+	if handler, ok := vm[r.Method]; ok && handler != nil {
 		handler.ServeHTTP(w, r)
 		return
 	}
