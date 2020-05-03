@@ -1,7 +1,7 @@
 # verbmux
 
 [![Issue Tracker][badge]](https://github.com/mellium/xmpp/issues)
-[![GoDoc](https://pkg.go.dev/mellium.im/verbmux?status.svg)](https://pkg.go.dev/mellium.im/verbmux)
+[![GoDoc](https://godoc.org/mellium.im/verbmux?status.svg)](https://pkg.go.dev/mellium.im/verbmux)
 [![Chat](https://inverse.chat/badge.svg?room=mellium@conference.samwhited.com)](https://conversations.im/j/mellium@conference.samwhited.com)
 [![License](https://img.shields.io/badge/license-FreeBSD-blue.svg)](https://opensource.org/licenses/BSD-2-Clause)
 
