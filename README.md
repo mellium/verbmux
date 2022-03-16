@@ -1,12 +1,10 @@
 # verbmux
 
 [![Issue Tracker][badge]](https://github.com/mellium/xmpp/issues)
-[![GoDoc](https://godoc.org/mellium.im/verbmux?status.svg)](https://pkg.go.dev/mellium.im/verbmux)
-[![Chat](https://inverse.chat/badge.svg?room=mellium@conference.samwhited.com)](https://conversations.im/j/mellium@conference.samwhited.com)
+[![Docs](https://pkg.go.dev/badge/mellium.im/verbmux)](https://pkg.go.dev/mellium.im/verbmux)
 [![License](https://img.shields.io/badge/license-FreeBSD-blue.svg)](https://opensource.org/licenses/BSD-2-Clause)
 
-[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png)](https://www.buymeacoffee.com/samwhited)
-[![Support Me](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/SamWhited/donate)
+<a href="https://opencollective.com/mellium" alt="Donate on Open Collective"><img src="https://opencollective.com/mellium/donate/button@2x.png?color=blue" width="200"/></a>
 
 *verbmux* is an HTTP multiplexer that can be used to route HTTP requests in Go
 programs based on their verb (GET, SET, HEAD, etc).
@@ -20,6 +18,5 @@ import (
   "mellium.im/verbmux"
 )
 ```
-
 
 [badge]: https://img.shields.io/badge/style-mellium%2fxmpp-green.svg?longCache=true&style=popout-square&label=issues
